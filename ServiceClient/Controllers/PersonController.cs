@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ServiceClient.Models;
 using System.IO;
+using ServiceClient.Logic;
 
 namespace ServiceClient.Controllers
 {
@@ -8,40 +9,31 @@ namespace ServiceClient.Controllers
     [Route("[controller]")]
     public class PersonController : ControllerBase
     {
-        private static List<Person> _persons;
+        private readonly PersonManager _manager;
 
         public PersonController()
         {
-            _persons = System.IO.File
-                .ReadAllLines("data.csv")
-                .Select(l => l.Split(","))
-                .Select(p => new Person
-                {
-                    Id = int.Parse(p[0]),
-                    Name = p[1],
-                    Age = int.Parse(p[2]),
-                })
-                .ToList();
+            _manager = new PersonManager();
         }
 
         [HttpGet()]
         public IEnumerable<Person> Get()
         {
-            return _persons;
+            return _manager.GetAll();
         }
 
         [HttpGet()]
         [Route("/Adults")]
         public IEnumerable<Person> GetAdults()
         {
-            return _persons.Where(p => p.Age >= 18);
+            return _manager.GetAllAdults();
         }
 
         [HttpGet()]
         [Route("/Children")]
         public IEnumerable<Person> GetChildren()
         {
-            return _persons.Where(p => p.Age < 18);
+            return _manager.GetAllChildren();
         }
     }
 }
