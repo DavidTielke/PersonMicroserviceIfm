@@ -1,4 +1,7 @@
 
+using ServiceClient.Data;
+using ServiceClient.Logic;
+
 namespace ServiceClient
 {
     public class Program
@@ -13,6 +16,11 @@ namespace ServiceClient
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddTransient<IPersonManager, PersonManager>();
+            builder.Services.AddTransient<IPersonRepository, PersonRepository>();
+            builder.Services.AddTransient<IPersonParser, PersonParser>();
+            builder.Services.AddTransient<IFileReader, FileReader>();
 
             var app = builder.Build();
 

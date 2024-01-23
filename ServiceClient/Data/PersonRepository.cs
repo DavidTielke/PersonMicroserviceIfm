@@ -14,6 +14,11 @@ namespace ServiceClient.Data
             _parser = parser;
         }
 
+        public void Insert(Person person)
+        {
+            
+        }
+
         public IEnumerable<Person> Query()
         {
             var lines = _reader.ReadAllLines();
@@ -24,6 +29,7 @@ namespace ServiceClient.Data
 
     public interface IPersonRepository
     {
+        void Insert(Person person);
         IEnumerable<Person> Query();
     }
 }

@@ -4,9 +4,9 @@
     {
         private readonly string _PATH;
 
-        public FileReader(string path)
+        public FileReader()
         {
-            _PATH = path;
+            _PATH = "data.csv";
         }
 
         public string[] ReadAllLines()

@@ -10,14 +10,11 @@ namespace ServiceClient.Controllers
     [Route("[controller]")]
     public class PersonController : ControllerBase
     {
-        private readonly PersonManager _manager;
+        private readonly IPersonManager _manager;
 
-        public PersonController()
+        public PersonController(IPersonManager manager)
         {
-            var parser = new PersonParser();
-            var reader = new FileReader("data.csv");
-            var repository = new PersonRepository(reader, parser);
-            _manager = new PersonManager(repository);
+            _manager = manager;
         }
 
         [HttpGet()]

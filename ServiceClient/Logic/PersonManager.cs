@@ -25,5 +25,10 @@ namespace ServiceClient.Logic
         {
             return _repository.Query();
         }
+
+        public void Add(Person person)
+        {
+            _repository.Insert(person);
+        }
     }
 }
