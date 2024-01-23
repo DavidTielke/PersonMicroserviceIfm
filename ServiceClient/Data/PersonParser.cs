@@ -5,7 +5,7 @@ namespace ServiceClient.Data
     // 1. EC
     // 2. TC
     // 3. UT
-    public class PersonParser
+    public class PersonParser : IPersonParser
     {
         public IEnumerable<Person> ParseFromCsv(string[] lines)
         {

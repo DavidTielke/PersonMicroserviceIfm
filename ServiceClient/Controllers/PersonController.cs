@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ServiceClient.Models;
 using System.IO;
+using ServiceClient.Data;
 using ServiceClient.Logic;
 
 namespace ServiceClient.Controllers
@@ -13,7 +14,10 @@ namespace ServiceClient.Controllers
 
         public PersonController()
         {
-            _manager = new PersonManager();
+            var parser = new PersonParser();
+            var reader = new FileReader("data.csv");
+            var repository = new PersonRepository(reader, parser);
+            _manager = new PersonManager(repository);
         }
 
         [HttpGet()]

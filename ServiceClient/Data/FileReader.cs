@@ -1,6 +1,6 @@
 ﻿namespace ServiceClient.Data
 {
-    public class FileReader
+    public class FileReader : IFileReader
     {
         private readonly string _PATH;
 
@@ -11,7 +11,14 @@
 
         public string[] ReadAllLines()
         {
-            return File.ReadAllLines(_PATH);
+            try
+            {
+                return File.ReadAllLines(_PATH);
+            }
+            catch (FileNotFoundException exc)
+            {
+                throw new InvalidOperationException("data to read cant be found", exc);
+            }
         }
     }
 }
