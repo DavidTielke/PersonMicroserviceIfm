@@ -9,9 +9,11 @@ namespace ServiceClient.Data
 
         public PersonRepository()
         {
-            _reader = new FileReader();
+            _reader = new FileReader("data.csv");
             _parser = new PersonParser();
         }
+
+
 
         public IEnumerable<Person> Query()
         {
